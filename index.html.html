@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE FAN JOURNAL — Document Every Moment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f0e8;
+    --yellow: #FFD100;
+    --red: #E8001D;
+    --gray: #1a1a1a;
+    --mid: #2e2e2e;
+    --muted: #888;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 999;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 40px;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px; letter-spacing: 0.12em;
+    color: var(--yellow);
+  }
+  .nav-cta {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--black); background: var(--yellow);
+    padding: 10px 22px; text-decoration: none;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-cta:hover { background: var(--white); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; place-items: center;
+    position: relative; overflow: hidden;
+    padding: 80px 40px 60px;
+  }
+
+  .hero-bg-number {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(300px, 55vw, 700px);
+    color: rgba(255,255,255,0.03);
+    line-height: 1; user-select: none; white-space: nowrap;
+    letter-spacing: -0.04em;
+  }
+
+  .hero-stripe {
+    position: absolute; top: 0; right: 0;
+    width: 8px; height: 100%;
+    background: repeating-linear-gradient(
+      to bottom, var(--yellow) 0px, var(--yellow) 40px,
+      var(--red) 40px, var(--red) 80px,
+      var(--black) 80px, var(--black) 120px
+    );
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 900px; text-align: center;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--yellow);
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; display: block; width: 40px; height: 2px;
+    background: var(--yellow);
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 18vw, 200px);
+    line-height: 0.88; letter-spacing: -0.01em;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-title span { color: var(--yellow); }
+  .hero-title .red { color: var(--red); }
+
+  .hero-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(18px, 3vw, 28px);
+    font-style: italic; color: rgba(245,240,232,0.65);
+    margin: 20px 0 40px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--black); background: var(--yellow);
+    padding: 18px 44px;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    transition: transform 0.15s, background 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { transform: scale(1.04); background: var(--white); }
+
+  .btn-secondary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--white);
+    padding: 16px 44px;
+    border: 2px solid rgba(245,240,232,0.3);
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    transition: border-color 0.15s, color 0.15s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--white); color: var(--white); }
+
+  .hero-scroll {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: fadeUp 0.6s 0.5s ease both;
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--muted), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--yellow);
+    padding: 12px 0; overflow: hidden;
+    position: relative;
+  }
+  .ticker-track {
+    display: flex; gap: 0;
+    animation: ticker 20s linear infinite;
+    white-space: nowrap;
+  }
+  .ticker-item {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px; letter-spacing: 0.08em;
+    color: var(--black); padding: 0 32px;
+  }
+  .ticker-dot {
+    color: var(--red); padding: 0;
+  }
+
+  /* ── FEATURES ── */
+  .features {
+    padding: 100px 40px;
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--red);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 88px);
+    line-height: 0.92; letter-spacing: 0.01em;
+    margin-bottom: 60px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+  }
+
+  .feature-card {
+    background: var(--gray);
+    padding: 36px 32px;
+    border-top: 3px solid transparent;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .feature-card::before {
+    content: attr(data-num);
+    position: absolute; top: -10px; right: 16px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px; color: rgba(255,255,255,0.04);
+    line-height: 1;
+  }
+  .feature-card:hover { border-color: var(--yellow); background: var(--mid); }
+
+  .feature-icon {
+    font-size: 28px; margin-bottom: 16px; display: block;
+  }
+  .feature-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px; font-weight: 700; letter-spacing: 0.04em;
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  .feature-card p {
+    font-size: 14px; color: rgba(245,240,232,0.55); line-height: 1.6;
+  }
+
+  /* ── JOURNAL SPREAD ── */
+  .spread-section {
+    background: var(--gray);
+    padding: 100px 40px;
+    overflow: hidden; position: relative;
+  }
+  .spread-section::before {
+    content: 'INSIDE';
+    position: absolute; top: 50%; left: -60px; transform: translateY(-50%) rotate(-90deg);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 120px; color: rgba(255,255,255,0.03);
+    letter-spacing: 0.1em; white-space: nowrap;
+  }
+
+  .spread-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+
+  .spread-pages {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    transform: perspective(1000px) rotateY(-8deg) rotateX(4deg);
+    transition: transform 0.4s ease;
+  }
+  .spread-pages:hover { transform: perspective(1000px) rotateY(0deg) rotateX(0deg); }
+
+  .page {
+    background: var(--white);
+    aspect-ratio: 3/4;
+    border-radius: 2px;
+    padding: 20px 16px;
+    color: var(--black);
+    position: relative; overflow: hidden;
+  }
+  .page-header {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px; letter-spacing: 0.15em;
+    color: var(--red); margin-bottom: 12px;
+    border-bottom: 2px solid var(--black);
+    padding-bottom: 6px;
+  }
+  .page-line {
+    height: 1px; background: rgba(10,10,10,0.12);
+    margin: 8px 0;
+  }
+  .page-score {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px; color: var(--black);
+    margin: 10px 0 4px;
+  }
+  .page-meta {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; color: rgba(10,10,10,0.4);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .page-stars { color: var(--red); font-size: 12px; margin: 8px 0; }
+  .page-note {
+    font-size: 9px; line-height: 1.7; color: rgba(10,10,10,0.5);
+    font-style: italic; margin-top: 8px;
+  }
+  .page-field {
+    background: rgba(10,10,10,0.06);
+    height: 28px; margin: 6px 0; border-radius: 2px;
+  }
+  .page-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(10,10,10,0.35); margin-top: 10px; display: block;
+  }
+
+  .spread-copy .section-label { margin-bottom: 12px; }
+  .spread-copy .section-title { margin-bottom: 24px; font-size: clamp(40px, 6vw, 72px); }
+  .spread-copy p {
+    font-size: 15px; line-height: 1.8; color: rgba(245,240,232,0.6);
+    margin-bottom: 32px;
+  }
+
+  /* ── PRICING ── */
+  .pricing {
+    padding: 100px 40px;
+    max-width: 1000px; margin: 0 auto; text-align: center;
+  }
+
+  .price-card {
+    background: var(--gray);
+    border: 2px solid var(--yellow);
+    padding: 60px 48px;
+    position: relative; display: inline-block;
+    max-width: 480px; width: 100%;
+    clip-path: polygon(20px 0%, 100% 0%, calc(100% - 20px) 100%, 0% 100%);
+  }
+
+  .price-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--red);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--white);
+    padding: 6px 20px;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  }
+
+  .price-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px; letter-spacing: 0.1em; color: var(--yellow);
+    margin-bottom: 8px;
+  }
+  .price-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 96px; line-height: 1; letter-spacing: -0.02em;
+    margin: 16px 0 4px;
+  }
+  .price-amount sup {
+    font-size: 40px; vertical-align: super; letter-spacing: 0;
+    color: rgba(245,240,232,0.6);
+  }
+  .price-period {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; color: var(--muted); letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 36px;
+  }
+
+  .price-features {
+    list-style: none; margin-bottom: 40px; text-align: left;
+  }
+  .price-features li {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px; font-weight: 600; letter-spacing: 0.04em;
+    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .price-features li::before {
+    content: '✦'; color: var(--yellow); font-size: 10px; flex-shrink: 0;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials {
+    background: var(--gray);
+    padding: 100px 40px;
+  }
+  .testimonials-inner {
+    max-width: 1200px; margin: 0 auto;
+  }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2px; margin-top: 60px;
+  }
+  .testimonial {
+    background: var(--black);
+    padding: 36px 32px;
+    border-left: 4px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .testimonial:nth-child(1) { border-color: var(--yellow); }
+  .testimonial:nth-child(2) { border-color: var(--red); }
+  .testimonial:nth-child(3) { border-color: var(--white); }
+
+  .testimonial-stars { color: var(--yellow); font-size: 14px; margin-bottom: 16px; }
+  .testimonial-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px; font-style: italic; line-height: 1.45;
+    margin-bottom: 20px; font-weight: 400;
+  }
+  .testimonial-author {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── CTA FOOTER ── */
+  .cta-section {
+    padding: 120px 40px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: 'GO';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(200px, 40vw, 500px);
+    color: rgba(255,255,255,0.025); line-height: 1;
+    pointer-events: none; user-select: none;
+  }
+  .cta-section .section-label { justify-content: center; }
+  .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 10vw, 120px);
+    line-height: 0.9; margin: 12px 0 24px;
+  }
+  .cta-title span { color: var(--yellow); }
+  .cta-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px; font-style: italic;
+    color: rgba(245,240,232,0.5); margin-bottom: 48px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--gray);
+    padding: 32px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px; letter-spacing: 0.12em; color: var(--yellow);
+  }
+  .footer-links {
+    display: flex; gap: 28px;
+  }
+  .footer-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    transition: color 0.15s;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy {
+    font-size: 12px; color: var(--muted);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50%       { opacity: 1;   transform: scaleY(1.15); }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .hero { padding: 80px 20px 60px; }
+    .features, .pricing, .testimonials, .cta-section { padding: 72px 20px; }
+    .spread-section { padding: 72px 20px; }
+    .spread-inner { grid-template-columns: 1fr; gap: 48px; }
+    .spread-pages { transform: none; }
+    footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">THE FAN JOURNAL</div>
+  <a href="#buy" class="nav-cta">Get Yours</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-number">1</div>
+  <div class="hero-stripe"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">For every fan. Every game. Every memory.</div>
+    <h1 class="hero-title">THE<br><span>FAN</span><br><span class="red">JOURNAL</span></h1>
+    <p class="hero-sub">Stop forgetting the moments that matter most.</p>
+    <div class="hero-actions">
+      <a href="#buy" class="btn-primary">Order Now — $29</a>
+      <a href="#inside" class="btn-secondary">See Inside</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">GAME DAY</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">YOUR STATS</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">YOUR MEMORIES</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">YOUR TEAM</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">EVERY PLAY</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">EVERY SEASON</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">ALL SPORTS</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">GAME DAY</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">YOUR STATS</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">YOUR MEMORIES</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">YOUR TEAM</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">EVERY PLAY</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">EVERY SEASON</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">ALL SPORTS</span><span class="ticker-item ticker-dot">✦</span>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="section-label reveal">What's Inside</div>
+  <h2 class="section-title reveal">BUILT FOR<br>REAL FANS</h2>
+  <div class="features-grid">
+    <div class="feature-card reveal" data-num="01">
+      <span class="feature-icon">🏟️</span>
+      <h3>Game Log Pages</h3>
+      <p>Dedicated spreads for every game — score, atmosphere, standout plays, and your raw reaction in the moment.</p>
+    </div>
+    <div class="feature-card reveal" data-num="02">
+      <span class="feature-icon">📊</span>
+      <h3>Season Tracker</h3>
+      <p>Running record of wins, losses, standings, and the key moments that defined your team's year.</p>
+    </div>
+    <div class="feature-card reveal" data-num="03">
+      <span class="feature-icon">⭐</span>
+      <h3>Player Spotlights</h3>
+      <p>Rate performances, track your MVPs, and build a personal record of the athletes you watched grow.</p>
+    </div>
+    <div class="feature-card reveal" data-num="04">
+      <span class="feature-icon">🎟️</span>
+      <h3>Ticket & Memory Pockets</h3>
+      <p>Built-in pockets for stubs, photos, and keepsakes. Because some memories deserve more than words.</p>
+    </div>
+    <div class="feature-card reveal" data-num="05">
+      <span class="feature-icon">📅</span>
+      <h3>Multi-Sport Ready</h3>
+      <p>Works for football, basketball, baseball, soccer, hockey — every sport, every season, one book.</p>
+    </div>
+    <div class="feature-card reveal" data-num="06">
+      <span class="feature-icon">🏆</span>
+      <h3>Playoff & Championship Pages</h3>
+      <p>Special bracket and playoff spreads for when it all matters most. Document the run to the title.</p>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNAL SPREAD -->
+<section class="spread-section" id="inside">
+  <div class="spread-inner">
+    <div class="spread-pages">
+      <div class="page">
+        <div class="page-header">Game Log</div>
+        <div class="page-score">24–17</div>
+        <div class="page-meta">Home · Week 8</div>
+        <div class="page-stars">★★★★☆</div>
+        <div class="page-line"></div>
+        <div class="page-line"></div>
+        <span class="page-label">Best Play</span>
+        <div class="page-field"></div>
+        <span class="page-label">Crowd Energy</span>
+        <div class="page-field"></div>
+        <div class="page-note">"That fourth-quarter drive was unreal. I'll never forget being in the stadium for that one..."</div>
+      </div>
+      <div class="page">
+        <div class="page-header">Season Tracker</div>
+        <span class="page-label">Record</span>
+        <div class="page-score" style="font-size:28px">6 — 2</div>
+        <div class="page-line"></div>
+        <span class="page-label">Top Performer</span>
+        <div class="page-field"></div>
+        <span class="page-label">Next Game</span>
+        <div class="page-field"></div>
+        <span class="page-label">Season Goal</span>
+        <div class="page-field" style="height:48px"></div>
+        <div class="page-line"></div>
+        <div class="page-stars" style="margin-top:8px">★★★★★</div>
+        <div class="page-note">Championship or bust.</div>
+      </div>
+    </div>
+    <div class="spread-copy reveal">
+      <div class="section-label">The Journal</div>
+      <h2 class="section-title">160 PAGES OF PURE FAN LIFE</h2>
+      <p>Thick, lay-flat pages that hold up to game-day conditions. Whether you're in the nosebleeds or the living room, the Fan Journal is built to capture it all.</p>
+      <a href="#buy" class="btn-primary">Grab Your Copy</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="buy">
+  <div class="section-label reveal">Get The Journal</div>
+  <h2 class="section-title reveal">ONE PRICE.<br>A SEASON OF<br>MEMORIES.</h2>
+  <div class="price-card reveal">
+    <div class="price-badge">Most Popular</div>
+    <div class="price-title">The Fan Journal</div>
+    <div class="price-amount"><sup>$</sup>29</div>
+    <div class="price-period">per journal · free shipping</div>
+    <ul class="price-features">
+      <li>160 lay-flat pages</li>
+      <li>Game log spreads for every matchup</li>
+      <li>Season stats & standings tracker</li>
+      <li>Player spotlight pages</li>
+      <li>Playoff & championship bracket pages</li>
+      <li>Keepsake pocket pages</li>
+      <li>Works for all sports</li>
+    </ul>
+    <a href="#" class="btn-primary" style="display:block;text-align:center;width:100%">Order Now</a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-label reveal">Fan Reviews</div>
+    <h2 class="section-title reveal">FANS ARE<br>TALKING</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"I've been a football fan for 30 years and I've never had a way to actually hold onto those memories. This journal changed that."</p>
+        <div class="testimonial-author">Mike T. — Green Bay, WI</div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"I use it for baseball, basketball AND football. The layout works for everything. My kids love flipping through old entries."</p>
+        <div class="testimonial-author">Carla M. — Chicago, IL</div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Got this as a gift and filled it up in one season. Just ordered three more — one for each of my kids who play travel sports."</p>
+        <div class="testimonial-author">Dave R. — Austin, TX</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-label reveal">Don't wait</div>
+  <h2 class="cta-title reveal">YOUR SEASON<br><span>STARTS NOW</span></h2>
+  <p class="cta-sub reveal">The games are already happening. Start capturing them.</p>
+  <div class="reveal">
+    <a href="#buy" class="btn-primary">Order The Fan Journal — $29</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">THE FAN JOURNAL</div>
+  <div class="footer-links">
+    <a href="#">About</a>
+    <a href="#">FAQ</a>
+    <a href="#">Shipping</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="footer-copy">© 2025 The Fan Journal. All rights reserved.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
