@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Was There — A Sports Fan Journal</title>
+
+<!-- Primary Meta Tags -->
+<meta name="title" content="I Was There — A Sports Fan Journal">
+<meta name="description" content="Record the games. Remember the moments. Share the memories. A sports fan journal for every fan, every sport, and every memory worth keeping.">
+<meta name="author" content="I Was There">
+
+<!-- Open Graph / Facebook / iMessage / WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://iwasthere-website.vercel.app/">
+<meta property="og:title" content="I Was There — A Sports Fan Journal">
+<meta property="og:description" content="Record the games. Remember the moments. Share the memories. A sports fan journal for every fan, every sport, and every memory worth keeping.">
+<meta property="og:image" content="https://iwasthere-website.vercel.app/preview.png">
+
+<!-- Twitter / X -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://iwasthere-website.vercel.app/">
+<meta property="twitter:title" content="I Was There — A Sports Fan Journal">
+<meta property="twitter:description" content="Record the games. Remember the moments. Share the memories. A sports fan journal for every fan, every sport, and every memory worth keeping.">
+<meta property="twitter:image" content="https://iwasthere-website.vercel.app/preview.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #0d0d0d;
+  --white: #f2ede4;
+  --paper: #f7f3ec;
+  --ink: #111111;
+  --mid: #1c1c1c;
+  --gray: #2a2a2a;
+  --muted: #777;
+  --border: rgba(242,237,228,0.12);
+  --green: #2d6a4f;
+  --green-light: #52b788;
+  --green-dark: #1b4332;
+  --green-pale: #d8f3dc;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  background: linear-gradient(to bottom, rgba(13,13,13,0.98) 70%, transparent);
+}
+.nav-logo { display: flex; flex-direction: column; line-height: 1; }
+.nav-logo-main { font-family: 'Anton', sans-serif; font-size: 18px; letter-spacing: 0.06em; color: var(--white); }
+.nav-logo-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+.nav-cta {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--white); background: var(--green); padding: 10px 24px; text-decoration: none; transition: background 0.15s;
+}
+.nav-cta:hover { background: var(--green-light); color: var(--black); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; padding: 100px 48px 60px; gap: 60px; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(-55deg, transparent, transparent 60px, rgba(255,255,255,0.013) 60px, rgba(255,255,255,0.013) 61px);
+}
+.hero-left { position: relative; z-index: 2; }
+.hero-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--green-light); display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 24px;
+  animation: fadeUp 0.5s ease both;
+}
+.hero-eyebrow span { display: block; width: 40px; height: 1px; background: var(--green-light); flex-shrink: 0; }
+.hero-title {
+  font-family: 'Anton', sans-serif; font-size: clamp(68px, 10vw, 136px);
+  line-height: 0.9; letter-spacing: 0.01em; margin-bottom: 24px;
+  animation: fadeUp 0.5s 0.08s ease both;
+}
+.hero-divider {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+  animation: fadeUp 0.5s 0.14s ease both;
+}
+.hero-divider-line { flex: 1; height: 1px; background: rgba(242,237,228,0.2); }
+.hero-divider-text { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.hero-desc { font-size: 15px; line-height: 1.8; color: rgba(242,237,228,0.5); max-width: 420px; margin-top: 60px; margin-bottom: 36px; animation: fadeUp 0.5s 0.18s ease both; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; animation: fadeUp 0.5s 0.24s ease both; }
+.btn-primary {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--white); background: var(--green); padding: 16px 36px; text-decoration: none; display: inline-block; transition: background 0.15s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--green-light); color: var(--black); transform: translateY(-1px); }
+.btn-ghost {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--white); background: transparent; padding: 15px 36px; text-decoration: none; display: inline-block;
+  border: 1px solid rgba(242,237,228,0.25); transition: border-color 0.15s;
+}
+.btn-ghost:hover { border-color: rgba(242,237,228,0.6); }
+
+/* JOURNAL COVER */
+.hero-right { position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; }
+.journal-cover {
+  width: min(320px, 85%); aspect-ratio: 3/4;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 32px 24px;
+  box-shadow: 18px 18px 0 rgba(0,0,0,0.55), 36px 36px 60px rgba(0,0,0,0.4);
+  transform: rotate(1.5deg); animation: fadeUp 0.5s 0.2s ease both; position: relative;
+  background: linear-gradient(160deg, #2d6a4f 0%, #1b4332 60%, #081c0e 100%);
+  overflow: hidden;
+}
+.journal-cover::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px;
+  background: repeating-linear-gradient(to bottom, rgba(0,0,0,0.5) 0px, rgba(0,0,0,0.5) 6px, rgba(255,255,255,0.08) 6px, rgba(255,255,255,0.08) 8px);
+}
+/* subtle texture on cover */
+.journal-cover::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  opacity: 0.6;
+}
+.cover-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; width: 100%; }
+.cover-title { font-family: 'Anton', sans-serif; font-size: clamp(40px, 7vw, 62px); color: #fff; text-align: center; line-height: 0.88; letter-spacing: 0.02em; text-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+.cover-rule { display: flex; align-items: center; gap: 8px; width: 100%; margin: 12px 0; }
+.cover-rule-line { flex: 1; height: 2px; background: rgba(255,255,255,0.5); }
+.cover-rule-text { font-family: 'Barlow Condensed', sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.8); white-space: nowrap; }
+.cover-stadium { width: 78%; margin: 10px 0; filter: brightness(0) invert(1) opacity(0.85); }
+.cover-tagline { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-style: italic; color: rgba(255,255,255,0.75); text-align: center; line-height: 1.4; margin-top: 12px; }
+
+/* TICKER */
+.ticker { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 13px 0; overflow: hidden; background: var(--mid); }
+.ticker-track { display: flex; animation: ticker 28s linear infinite; white-space: nowrap; }
+.ticker-item { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(242,237,228,0.35); padding: 0 28px; }
+.ticker-sep { color: var(--green-light); opacity: 0.6; padding: 0 4px; font-size: 10px; }
+
+/* SECTION COMMONS */
+.section-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase; color: var(--green-light); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.section-eyebrow::after { content: ''; display: block; width: 28px; height: 1px; background: var(--green-light); }
+.section-title { font-family: 'Anton', sans-serif; font-size: clamp(44px, 7vw, 82px); line-height: 0.9; letter-spacing: 0.01em; margin-bottom: 48px; }
+
+/* INSIDE SECTION */
+.inside { padding: 100px 48px 60px; max-width: 1300px; margin: 0 auto; }
+
+/* TOGGLE */
+.spread-toggle {
+  display: flex; gap: 0; margin-bottom: 40px; border: 1px solid var(--border); width: fit-content;
+}
+.toggle-btn {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 10px 28px; background: transparent; color: var(--muted); border: none; cursor: pointer; transition: background 0.15s, color 0.15s;
+}
+.toggle-btn.active { background: var(--green); color: var(--white); }
+
+/* SPREAD WRAPPER */
+.spread-wrapper { display: none; }
+.spread-wrapper.active { display: block; }
+
+/* THE JOURNAL SPREAD — two side-by-side pages */
+.journal-spread {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  max-width: 960px;
+}
+
+/* PAGE BASE */
+.jpage {
+  background: #fff; color: #111;
+  font-family: 'Barlow Condensed', sans-serif;
+  padding: 28px 28px 28px 36px;
+  position: relative; overflow: hidden;
+}
+.jpage-right { padding: 28px 36px 28px 28px; border-left: 1px solid #ddd; }
+
+/* spine simulation */
+.jpage::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: repeating-linear-gradient(to bottom, #222 0, #222 5px, #555 5px, #555 7px); }
+
+/* PAGE HEADER ROW */
+.jp-top-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; border-bottom: 2.5px solid #111; padding-bottom: 10px; }
+.jp-game-badge { display: flex; align-items: center; gap: 10px; }
+.jp-game-label { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: #111; }
+.jp-game-box { width: 36px; height: 36px; border: 2px solid #111; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: #111; font-family: 'Anton', sans-serif; }
+.jp-date-col { text-align: right; }
+.jp-date-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #888; display: block; }
+.jp-date-val { font-size: 13px; font-weight: 600; color: #111; display: block; }
+
+/* DAY CIRCLES */
+.day-circles { display: flex; gap: 5px; margin-top: 4px; justify-content: flex-end; }
+.day-circle { width: 18px; height: 18px; border: 1.5px solid #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.day-circle span { font-size: 7px; font-weight: 700; letter-spacing: 0; color: #999; }
+.day-circle.active { border-color: #111; background: #111; }
+.day-circle.active span { color: #fff; }
+
+/* FIELD ROWS */
+.jp-field { margin-bottom: 12px; }
+.jp-field-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #888; display: block; margin-bottom: 3px; }
+.jp-field-line { border: none; border-bottom: 1.5px solid #ccc; display: block; width: 100%; height: 22px; background: transparent; font-family: 'Barlow Condensed', sans-serif; font-size: 14px; color: #111; }
+.jp-field-val { border-bottom: 1.5px solid #ccc; font-size: 14px; color: #111; font-weight: 500; display: block; padding-bottom: 2px; min-height: 22px; }
+
+.jp-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* MATCHUP BLOCK */
+.jp-matchup { border: none; margin: 14px 0; }
+.jp-matchup-grid { display: grid; grid-template-columns: 1fr 44px 1fr; gap: 8px; align-items: stretch; }
+.jp-team-card { border: 2px solid #111; border-radius: 10px; overflow: hidden; }
+.jp-team-header { background: #111; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 5px 8px; text-align: center; }
+.jp-team-body { padding: 8px; }
+.jp-team-name-line { border-bottom: 1.5px solid #ccc; font-size: 12px; color: #111; min-height: 20px; margin-bottom: 8px; font-weight: 500; padding-bottom: 2px; }
+.jp-team-score-box { border: 2px solid #ccc; border-radius: 6px; height: 42px; display: flex; align-items: center; justify-content: center; }
+.jp-team-score-box.filled { font-family: 'Anton', sans-serif; font-size: 28px; color: #111; }
+.jp-vs-circle { width: 44px; height: 44px; border: 2px solid #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Anton', sans-serif; font-size: 12px; color: #111; align-self: center; background: #111; color: #fff; margin-top: 28px; }
+
+/* COMPETITION TYPE */
+.jp-comp-section { margin: 14px 0; }
+.jp-comp-title { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #111; display: block; text-align: center; margin-bottom: 10px; }
+.jp-checkboxes { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px 4px; }
+.jp-checkbox { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #111; }
+.jp-check-box { width: 14px; height: 14px; border: 2px solid #111; border-radius: 2px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.jp-check-box.checked { background: #111; }
+.jp-check-box.checked::after { content: '✓'; color: #fff; font-size: 9px; font-weight: 900; }
+
+/* TICKET INFO */
+.jp-ticket-section { margin-top: 14px; }
+.jp-ticket-title { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #111; display: block; text-align: center; margin-bottom: 10px; }
+.jp-ticket-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+.jp-ticket-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: center; }
+.jp-pill { border: 1.5px solid #111; border-radius: 20px; padding: 5px 10px; font-size: 12px; font-weight: 600; color: #111; display: flex; align-items: center; gap: 4px; }
+.jp-pill-label { font-weight: 700; }
+.jp-pill-val { color: #333; }
+
+/* PAGE NUMBER */
+.jp-page-num { position: absolute; bottom: 12px; right: 16px; width: 22px; height: 22px; border: 2px solid #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #111; }
+
+/* RIGHT PAGE STYLES */
+.jp-temp-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.jp-temp-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #111; }
+.jp-temp-line { border-bottom: 1.5px solid #ccc; width: 50px; display: inline-block; height: 20px; vertical-align: bottom; font-size: 14px; font-weight: 700; color: #111; text-align: center; line-height: 20px; }
+.jp-temp-unit { font-size: 12px; font-weight: 700; color: #555; }
+
+.jp-weather-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 10px 0 16px; }
+.jp-weather-item { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #111; }
+.jp-weather-icon { font-size: 16px; }
+
+.jp-attended { margin: 14px 0; }
+.jp-attended-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #111; display: block; margin-bottom: 6px; }
+.jp-attended-line { border-bottom: 1.5px solid #ccc; height: 22px; font-size: 14px; color: #111; font-weight: 500; display: flex; align-items: flex-end; padding-bottom: 2px; }
+
+.jp-two-col-section { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 14px 0; }
+.jp-col-title { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #111; display: block; margin-bottom: 8px; }
+.jp-numbered-list { display: flex; flex-direction: column; gap: 6px; }
+.jp-numbered-item { display: flex; align-items: center; gap: 6px; }
+.jp-num-circle { width: 20px; height: 20px; border-radius: 50%; background: #111; color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.jp-num-circle.outline { background: transparent; border: 2px solid #111; color: #111; }
+.jp-item-line { border-bottom: 1.5px solid #ccc; flex: 1; height: 20px; font-size: 12px; color: #111; font-weight: 500; display: flex; align-items: flex-end; padding-bottom: 2px; }
+
+.jp-conc-lines { display: flex; flex-direction: column; gap: 8px; }
+.jp-conc-line { border-bottom: 1.5px solid #ccc; height: 22px; font-size: 12px; color: #111; font-weight: 500; display: flex; align-items: flex-end; padding-bottom: 2px; }
+
+/* RATINGS */
+.jp-ratings-section { margin: 14px 0; }
+.jp-ratings-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.jp-rating-col { text-align: center; }
+.jp-rating-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #111; display: block; margin-bottom: 6px; }
+.jp-bubbles { display: flex; flex-wrap: wrap; gap: 3px; justify-content: center; margin-bottom: 3px; }
+.jp-bubble { width: 16px; height: 16px; border: 1.5px solid #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 7px; color: #aaa; }
+.jp-bubble.filled { background: #111; border-color: #111; }
+.jp-bubble.filled span { color: transparent; }
+.jp-bubble-row { display: flex; gap: 3px; justify-content: center; }
+.jp-bubble-nums { display: flex; justify-content: space-between; padding: 0 1px; }
+.jp-bubble-num { font-size: 7px; color: #aaa; width: 16px; text-align: center; }
+
+/* NOTES */
+.jp-notes-section { margin-top: 12px; }
+.jp-notes-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #111; display: block; margin-bottom: 8px; }
+.jp-note-line { border-bottom: 1px solid #ddd; height: 24px; margin-bottom: 1px; font-size: 12px; color: #111; display: flex; align-items: flex-end; padding-bottom: 2px; font-family: 'Barlow', sans-serif; font-style: italic; }
+
+/* FEATURES */
+.features { padding: 80px 48px 100px; max-width: 1200px; margin: 0 auto; }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.feature { background: var(--black); padding: 32px 28px; transition: background 0.2s; }
+.feature:hover { background: var(--mid); }
+.feature-num { font-family: 'Anton', sans-serif; font-size: 11px; letter-spacing: 0.15em; color: var(--green-light); margin-bottom: 16px; display: block; }
+.feature h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 19px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; }
+.feature p { font-size: 13px; line-height: 1.7; color: rgba(242,237,228,0.4); }
+
+/* PROOF */
+.proof { background: var(--mid); padding: 72px 48px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.proof-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); }
+.proof-stat { padding: 24px 28px; text-align: center; border-right: 1px solid var(--border); }
+.proof-stat:last-child { border-right: none; }
+.proof-num { font-family: 'Anton', sans-serif; font-size: clamp(48px, 6vw, 76px); line-height: 1; display: block; margin-bottom: 6px; color: var(--white); }
+.proof-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); }
+
+/* TESTIMONIALS */
+.testimonials { padding: 100px 48px; max-width: 1200px; margin: 0 auto; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.review { border: 1px solid var(--border); padding: 28px 24px; transition: border-color 0.2s; }
+.review:hover { border-color: rgba(82,183,136,0.35); }
+.review-stars { font-size: 11px; color: var(--green-light); letter-spacing: 3px; margin-bottom: 12px; }
+.review-text { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-style: italic; line-height: 1.45; color: rgba(242,237,228,0.8); margin-bottom: 16px; }
+.review-author { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+
+/* PRICING */
+.pricing { background: var(--black); padding: 100px 48px; text-align: center; }
+.pricing-inner { max-width: 480px; margin: 0 auto; }
+.pricing .section-eyebrow { color: var(--green-light); justify-content: center; }
+.pricing .section-eyebrow::after { background: var(--green-light); }
+.pricing .section-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--green-light); }
+.pricing .section-title { color: var(--white); margin-bottom: 6px; }
+.pricing-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-style: italic; color: #888; margin-bottom: 36px; }
+.price-box { border: 2px solid var(--white); padding: 44px 36px; margin-bottom: 14px; }
+.price-amount { font-family: 'Anton', sans-serif; font-size: 88px; line-height: 1; color: var(--white); display: block; margin-bottom: 2px; }
+.price-period { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; display: block; }
+.price-includes { list-style: none; text-align: left; margin-bottom: 32px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+.price-includes li { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.03em; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.07); color: var(--white); display: flex; align-items: center; gap: 10px; }
+.price-includes li::before { content: '—'; color: var(--green-light); font-weight: 700; }
+.btn-buy { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); background: var(--green); padding: 18px 48px; text-decoration: none; display: block; transition: background 0.15s; }
+.btn-buy:hover { background: var(--green-dark); }
+.pricing-note { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 0.1em; color: #aaa; margin-top: 12px; text-transform: uppercase; }
+
+/* FINAL CTA */
+.final-cta { padding: 110px 48px; text-align: center; position: relative; overflow: hidden; }
+.final-cta::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,255,255,0.01) 80px, rgba(255,255,255,0.01) 81px);
+}
+.final-cta .section-eyebrow { justify-content: center; }
+.final-cta .section-eyebrow::after { display: none; }
+.final-cta .section-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--green-light); }
+.final-cta .section-title { font-size: clamp(52px, 9vw, 108px); }
+.final-cta-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-style: italic; color: var(--muted); margin-bottom: 40px; }
+
+/* FOOTER */
+footer { background: #f7f3ec; border-top: 1px solid rgba(0,0,0,0.08); padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-logo-main { font-family: 'Anton', sans-serif; font-size: 16px; letter-spacing: 0.06em; color: var(--ink); }
+.footer-logo-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: #999; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #999; text-decoration: none; transition: color 0.15s; }
+.footer-links a:hover { color: var(--green); }
+.footer-copy { font-size: 11px; color: #bbb; }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  nav { padding: 18px 24px; }
+  .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; text-align: center; }
+  .hero-eyebrow, .hero-divider { justify-content: center; }
+  .hero-desc { margin: 0 auto 32px; }
+  .hero-actions { justify-content: center; }
+  .hero-right { margin-top: 40px; }
+  .inside { padding: 80px 16px 40px; }
+  .features, .testimonials, .pricing, .final-cta { padding-left: 24px; padding-right: 24px; }
+  .proof { padding: 56px 24px; }
+  .journal-spread { grid-template-columns: 1fr; }
+  .jpage-right { border-left: none; border-top: 1px solid #ddd; }
+  .features-grid, .reviews-grid { grid-template-columns: 1fr; }
+  .proof-inner { grid-template-columns: 1fr; }
+  .proof-stat { border-right: none; border-bottom: 1px solid var(--border); }
+  footer { padding: 24px; flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-main">I WAS THERE</span>
+    <span class="nav-logo-sub">A Sports Fan Journal</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:28px;"><a href="#buy" class="nav-cta">Order Now — $39</a></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span></span>A Sports Fan Journal<span></span></div>
+    <h1 class="hero-title">I WAS<br>THERE.</h1>
+    <div class="hero-divider">
+      <div class="hero-divider-line"></div>
+      <span class="hero-divider-text">Record the Games. Remember the Moments.</span>
+      <div class="hero-divider-line"></div>
+    </div>
+    <p class="hero-desc">The only journal built for fans who show up. Log every game, capture every memory, and hold onto the moments you'll want to relive for the rest of your life.</p>
+    <div class="hero-actions">
+      <a href="#buy" class="btn-primary">Get Your Journal — $39</a>
+      <a href="#inside" class="btn-ghost">See Inside</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="journal-cover">
+      <div class="cover-inner">
+        <div class="cover-title">I WAS<br>THERE</div>
+        <div class="cover-rule">
+          <div class="cover-rule-line"></div>
+          <span class="cover-rule-text">A Sports Fan Journal</span>
+          <div class="cover-rule-line"></div>
+        </div>
+        <svg class="cover-stadium" viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="140" cy="110" rx="125" ry="42" stroke="#fff" stroke-width="2.5" fill="none"/>
+          <ellipse cx="140" cy="95" rx="125" ry="42" stroke="#fff" stroke-width="2" fill="none"/>
+          <ellipse cx="140" cy="90" rx="88" ry="28" stroke="#fff" stroke-width="1.5" fill="none"/>
+          <ellipse cx="140" cy="88" rx="60" ry="18" stroke="#fff" stroke-width="1" fill="none"/>
+          <line x1="140" y1="70" x2="140" y2="106" stroke="#fff" stroke-width="0.8"/>
+          <path d="M30 95 Q140 55 250 95" stroke="#fff" stroke-width="1" fill="none"/>
+          <path d="M52 100 Q140 66 228 100" stroke="#fff" stroke-width="0.8" fill="none"/>
+          <line x1="68" y1="68" x2="68" y2="95" stroke="#fff" stroke-width="0.8"/>
+          <line x1="100" y1="58" x2="98" y2="87" stroke="#fff" stroke-width="0.8"/>
+          <line x1="180" y1="58" x2="182" y2="87" stroke="#fff" stroke-width="0.8"/>
+          <line x1="212" y1="68" x2="212" y2="95" stroke="#fff" stroke-width="0.8"/>
+          <rect x="80" y="108" width="120" height="18" stroke="#fff" stroke-width="1.5" fill="none"/>
+          <line x1="110" y1="108" x2="110" y2="126" stroke="#fff" stroke-width="1"/>
+          <line x1="140" y1="108" x2="140" y2="126" stroke="#fff" stroke-width="1"/>
+          <line x1="170" y1="108" x2="170" y2="126" stroke="#fff" stroke-width="1"/>
+          <rect x="85" y="111" width="20" height="10" stroke="#fff" stroke-width="0.8" fill="none"/>
+          <rect x="115" y="111" width="20" height="10" stroke="#fff" stroke-width="0.8" fill="none"/>
+          <rect x="145" y="111" width="20" height="10" stroke="#fff" stroke-width="0.8" fill="none"/>
+          <rect x="175" y="111" width="20" height="10" stroke="#fff" stroke-width="0.8" fill="none"/>
+          <rect x="22" y="42" width="6" height="28" stroke="#fff" stroke-width="1" fill="none"/>
+          <rect x="16" y="38" width="18" height="7" rx="1" stroke="#fff" stroke-width="1" fill="rgba(255,255,255,0.3)"/>
+          <rect x="58" y="28" width="5" height="22" stroke="#fff" stroke-width="1" fill="none"/>
+          <rect x="53" y="24" width="15" height="6" rx="1" stroke="#fff" stroke-width="1" fill="rgba(255,255,255,0.3)"/>
+          <rect x="217" y="28" width="5" height="22" stroke="#fff" stroke-width="1" fill="none"/>
+          <rect x="212" y="24" width="15" height="6" rx="1" stroke="#fff" stroke-width="1" fill="rgba(255,255,255,0.3)"/>
+          <rect x="252" y="42" width="6" height="28" stroke="#fff" stroke-width="1" fill="none"/>
+          <rect x="246" y="38" width="18" height="7" rx="1" stroke="#fff" stroke-width="1" fill="rgba(255,255,255,0.3)"/>
+        </svg>
+        <div class="cover-tagline">Record the Games.<br><em>Remember the Moments.</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">All Sports</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Tell Stories</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Game Day</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Lifelong Memories</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Your Experience</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">All Sports</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Tell Stories</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Game Day</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Lifelong Memories</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Your Experience</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">All Sports</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Tell Stories</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Game Day</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Lifelong Memories</span><span class="ticker-sep">✦</span>
+    <span class="ticker-item">Your Experience</span><span class="ticker-sep">✦</span>
+  </div>
+</div>
+
+<!-- INSIDE THE JOURNAL -->
+<section class="inside" id="inside">
+  <div class="section-eyebrow reveal">Inside the Journal</div>
+  <h2 class="section-title reveal">EVERY GAME.<br>EVERY DETAIL.</h2>
+
+  <div class="spread-toggle reveal">
+    <button class="toggle-btn active" onclick="showSpread('blank')">Blank Pages</button>
+    <button class="toggle-btn" onclick="showSpread('filled')">Filled In Example</button>
+  </div>
+
+  <!-- BLANK SPREAD -->
+  <div class="spread-wrapper active reveal" id="spread-blank">
+    <div class="journal-spread">
+
+      <!-- LEFT PAGE: BLANK GAME LOG -->
+      <div class="jpage">
+        <div class="jp-top-row">
+          <div class="jp-game-badge">
+            <span class="jp-game-label">GAME:</span>
+            <div class="jp-game-box"></div>
+          </div>
+          <div class="jp-date-col">
+            <span class="jp-date-label">Date</span>
+            <span class="jp-date-val" style="border-bottom:1.5px solid #ccc;min-width:120px;display:block;">&nbsp;</span>
+            <div class="day-circles">
+              <div class="day-circle"><span>M</span></div>
+              <div class="day-circle"><span>T</span></div>
+              <div class="day-circle"><span>W</span></div>
+              <div class="day-circle"><span>T</span></div>
+              <div class="day-circle"><span>F</span></div>
+              <div class="day-circle"><span>S</span></div>
+              <div class="day-circle"><span>S</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="jp-two-col">
+          <div class="jp-field">
+            <span class="jp-field-label">Sport</span>
+            <div class="jp-field-val">&nbsp;</div>
+          </div>
+          <div></div>
+        </div>
+
+        <div class="jp-two-col" style="margin-top:10px;">
+          <div class="jp-field">
+            <span class="jp-field-label">Location</span>
+            <div class="jp-field-val">&nbsp;</div>
+          </div>
+          <div class="jp-field">
+            <span class="jp-field-label">Stadium / Arena</span>
+            <div class="jp-field-val">&nbsp;</div>
+          </div>
+        </div>
+
+        <div class="jp-matchup" style="margin-top:14px;">
+          <div class="jp-matchup-grid">
+            <div class="jp-team-card">
+              <div class="jp-team-header">Away Team</div>
+              <div class="jp-team-body">
+                <div class="jp-team-name-line">&nbsp;</div>
+                <div class="jp-team-score-box"></div>
+              </div>
+            </div>
+            <div class="jp-vs-circle">VS</div>
+            <div class="jp-team-card">
+              <div class="jp-team-header">Home Team</div>
+              <div class="jp-team-body">
+                <div class="jp-team-name-line">&nbsp;</div>
+                <div class="jp-team-score-box"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="jp-comp-section">
+          <span class="jp-comp-title">Competition Type</span>
+          <div class="jp-checkboxes">
+            <div class="jp-checkbox"><div class="jp-check-box"></div>Preseason</div>
+            <div class="jp-checkbox"><div class="jp-check-box"></div>Regular Season</div>
+            <div class="jp-checkbox"><div class="jp-check-box"></div>Playoffs</div>
+            <div class="jp-checkbox"><div class="jp-check-box"></div>Friendly</div>
+            <div class="jp-checkbox"><div class="jp-check-box"></div>Other <span style="border-bottom:1px solid #ccc;width:40px;display:inline-block;">&nbsp;</span></div>
+          </div>
+        </div>
+
+        <div class="jp-ticket-section">
+          <span class="jp-ticket-title">Ticket Information</span>
+          <div class="jp-ticket-grid">
+            <div class="jp-pill"><span class="jp-pill-label">Section:</span><span class="jp-pill-val">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+            <div class="jp-pill"><span class="jp-pill-label">Row:</span><span class="jp-pill-val">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+            <div class="jp-pill"><span class="jp-pill-label">Seat:</span><span class="jp-pill-val">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+          </div>
+          <div class="jp-ticket-grid-2">
+            <div class="jp-pill"><span class="jp-pill-label">Ticket Price:</span><span class="jp-pill-val">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+            <div class="jp-pill"><span class="jp-pill-label">Attendance:</span><span class="jp-pill-val">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+          </div>
+        </div>
+        <div class="jp-page-num">4</div>
+      </div>
+
+      <!-- RIGHT PAGE: BLANK ATMOSPHERE -->
+      <div class="jpage jpage-right">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;border-bottom:2px solid #111;padding-bottom:10px;">
+          <span class="jp-temp-label">Temperature</span>
+          <div class="jp-temp-line">&nbsp;</div>
+          <span class="jp-temp-unit">°F / °C</span>
+        </div>
+
+        <div class="jp-weather-grid">
+          <div class="jp-weather-item"><div class="jp-check-box" style="border-color:#ccc;"></div><span>Sunny</span> <span class="jp-weather-icon">☀️</span></div>
+          <div class="jp-weather-item"><div class="jp-check-box" style="border-color:#ccc;"></div><span>Cloudy</span> <span class="jp-weather-icon">⛅</span></div>
+          <div class="jp-weather-item"><div class="jp-check-box" style="border-color:#ccc;"></div><span>Rainy</span> <span class="jp-weather-icon">🌧️</span></div>
+          <div class="jp-weather-item"><div class="jp-check-box" style="border-color:#ccc;"></div><span>Stormy</span> <span class="jp-weather-icon">⛈️</span></div>
+          <div class="jp-weather-item"><div class="jp-check-box" style="border-color:#ccc;"></div><span>Snowy</span> <span class="jp-weather-icon">❄️</span></div>
+          <div class="jp-weather-item"><div class="jp-check-box" style="border-color:#ccc;"></div><span>Indoors</span> <span class="jp-weather-icon">🏠</span></div>
+        </div>
+
+        <div class="jp-attended">
+          <span class="jp-attended-label">Did You Attend With Anybody?</span>
+          <div class="jp-attended-line">&nbsp;</div>
+        </div>
+
+        <div class="jp-two-col-section">
+          <div>
+            <span class="jp-col-title">Top 3 Performers</span>
+            <div class="jp-numbered-list">
+              <div class="jp-numbered-item"><div class="jp-num-circle">1</div><div class="jp-item-line">&nbsp;</div></div>
+              <div class="jp-numbered-item"><div class="jp-num-circle">2</div><div class="jp-item-line">&nbsp;</div></div>
+              <div class="jp-numbered-item"><div class="jp-num-circle">3</div><div class="jp-item-line">&nbsp;</div></div>
+            </div>
+          </div>
+          <div>
+            <span class="jp-col-title">Concessions</span>
+            <div class="jp-conc-lines">
+              <div class="jp-conc-line">&nbsp;</div>
+              <div class="jp-conc-line">&nbsp;</div>
+              <div class="jp-conc-line">&nbsp;</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="jp-ratings-section">
+          <div class="jp-ratings-grid">
+            <div class="jp-rating-col">
+              <span class="jp-rating-label">Atmosphere</span>
+              <div class="jp-bubbles">
+                <div class="jp-bubble"><span>1</span></div><div class="jp-bubble"><span>2</span></div><div class="jp-bubble"><span>3</span></div><div class="jp-bubble"><span>4</span></div><div class="jp-bubble"><span>5</span></div>
+              </div>
+              <div class="jp-bubbles">
+                <div class="jp-bubble"><span>6</span></div><div class="jp-bubble"><span>7</span></div><div class="jp-bubble"><span>8</span></div><div class="jp-bubble"><span>9</span></div><div class="jp-bubble"><span>10</span></div>
+              </div>
+              <div class="jp-bubbles" style="margin-top:2px;">
+                <div style="font-size:7px;color:#aaa;width:16px;text-align:center;">1</div>
+                <div style="font-size:7px;color:#aaa;width:16px;text-align:center;">2</div>
+                <div style="font-size:7px;color:#aaa;width:16px;text-align:center;">3</div>
+                <div style="font-size:7px;color:#aaa;width:16px;text-align:center;">4</div>
+                <div style="font-size:7px;color:#aaa;width:16px;text-align:center;">5</div>
+              </div>
+              <div class="jp-bubbles">
+                <div style="font-size:7px;color:#aaa;width:16px;text-align:center;">6</div>
+                <div style="font-size:7px;color:#aaa;width:16px;text-align:center;">7</div>
+                <div style="font-size:7px;color:#aaa;width:16px;text-align:center;">8</div>
+                <div style="font-size:7px;color:#aaa;width:16px;text-align:center;">9</div>
+                <div style="font-size:7px;color:#aaa;width:16px;text-align:center;">10</div>
+              </div>
+            </div>
+            <div class="jp-rating-col">
+              <span class="jp-rating-label">Stadium</span>
+              <div class="jp-bubbles">
+                <div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div>
+              </div>
+              <div class="jp-bubbles">
+                <div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div>
+              </div>
+            </div>
+            <div class="jp-rating-col">
+              <span class="jp-rating-label">Overall</span>
+              <div class="jp-bubbles">
+                <div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div>
+              </div>
+              <div class="jp-bubbles">
+                <div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="jp-notes-section">
+          <span class="jp-notes-label">Notes</span>
+          <div class="jp-note-line">&nbsp;</div>
+          <div class="jp-note-line">&nbsp;</div>
+          <div class="jp-note-line">&nbsp;</div>
+          <div class="jp-note-line">&nbsp;</div>
+          <div class="jp-note-line">&nbsp;</div>
+        </div>
+        <div class="jp-page-num">4</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILLED SPREAD -->
+  <div class="spread-wrapper" id="spread-filled">
+    <div class="journal-spread">
+
+      <!-- LEFT PAGE: FILLED GAME LOG -->
+      <div class="jpage">
+        <div class="jp-top-row">
+          <div class="jp-game-badge">
+            <span class="jp-game-label">GAME:</span>
+            <div class="jp-game-box">1</div>
+          </div>
+          <div class="jp-date-col">
+            <span class="jp-date-label">Date</span>
+            <span class="jp-date-val" style="border-bottom:1.5px solid #ccc;min-width:120px;display:block;">4/22/26</span>
+            <div class="day-circles">
+              <div class="day-circle"><span>M</span></div>
+              <div class="day-circle"><span>T</span></div>
+              <div class="day-circle active"><span>W</span></div>
+              <div class="day-circle"><span>T</span></div>
+              <div class="day-circle"><span>F</span></div>
+              <div class="day-circle"><span>S</span></div>
+              <div class="day-circle"><span>S</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="jp-two-col">
+          <div class="jp-field">
+            <span class="jp-field-label">Sport</span>
+            <div class="jp-field-val">Baseball</div>
+          </div>
+        </div>
+
+        <div class="jp-two-col" style="margin-top:10px;">
+          <div class="jp-field">
+            <span class="jp-field-label">Location</span>
+            <div class="jp-field-val">Washington D.C.</div>
+          </div>
+          <div class="jp-field">
+            <span class="jp-field-label">Stadium / Arena</span>
+            <div class="jp-field-val">Nationals Park</div>
+          </div>
+        </div>
+
+        <div class="jp-matchup" style="margin-top:14px;">
+          <div class="jp-matchup-grid">
+            <div class="jp-team-card">
+              <div class="jp-team-header">Away Team</div>
+              <div class="jp-team-body">
+                <div class="jp-team-name-line">Atlanta Braves</div>
+                <div class="jp-team-score-box filled">7</div>
+              </div>
+            </div>
+            <div class="jp-vs-circle">VS</div>
+            <div class="jp-team-card">
+              <div class="jp-team-header">Home Team</div>
+              <div class="jp-team-body">
+                <div class="jp-team-name-line">Washington Nationals</div>
+                <div class="jp-team-score-box filled">5</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="jp-comp-section">
+          <span class="jp-comp-title">Competition Type</span>
+          <div class="jp-checkboxes">
+            <div class="jp-checkbox"><div class="jp-check-box"></div>Preseason</div>
+            <div class="jp-checkbox"><div class="jp-check-box checked"></div>Regular Season</div>
+            <div class="jp-checkbox"><div class="jp-check-box"></div>Playoffs</div>
+            <div class="jp-checkbox"><div class="jp-check-box"></div>Friendly</div>
+            <div class="jp-checkbox"><div class="jp-check-box"></div>Other</div>
+          </div>
+        </div>
+
+        <div class="jp-ticket-section">
+          <span class="jp-ticket-title">Ticket Information</span>
+          <div class="jp-ticket-grid">
+            <div class="jp-pill"><span class="jp-pill-label">Section:</span><span class="jp-pill-val">113</span></div>
+            <div class="jp-pill"><span class="jp-pill-label">Row:</span><span class="jp-pill-val">24</span></div>
+            <div class="jp-pill"><span class="jp-pill-label">Seat:</span><span class="jp-pill-val">7</span></div>
+          </div>
+          <div class="jp-ticket-grid-2">
+            <div class="jp-pill"><span class="jp-pill-label">Ticket Price:</span><span class="jp-pill-val">$19.99</span></div>
+            <div class="jp-pill"><span class="jp-pill-label">Attendance:</span><span class="jp-pill-val">16,459</span></div>
+          </div>
+        </div>
+        <div class="jp-page-num">4</div>
+      </div>
+
+      <!-- RIGHT PAGE: FILLED ATMOSPHERE -->
+      <div class="jpage jpage-right">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;border-bottom:2px solid #111;padding-bottom:10px;">
+          <span class="jp-temp-label">Temperature</span>
+          <div class="jp-temp-line">70</div>
+          <span class="jp-temp-unit">°F / °C</span>
+        </div>
+
+        <div class="jp-weather-grid">
+          <div class="jp-weather-item"><div class="jp-check-box checked"></div><span>Sunny</span> <span class="jp-weather-icon">☀️</span></div>
+          <div class="jp-weather-item"><div class="jp-check-box" style="border-color:#ccc;"></div><span>Cloudy</span> <span class="jp-weather-icon">⛅</span></div>
+          <div class="jp-weather-item"><div class="jp-check-box" style="border-color:#ccc;"></div><span>Rainy</span> <span class="jp-weather-icon">🌧️</span></div>
+          <div class="jp-weather-item"><div class="jp-check-box" style="border-color:#ccc;"></div><span>Stormy</span> <span class="jp-weather-icon">⛈️</span></div>
+          <div class="jp-weather-item"><div class="jp-check-box" style="border-color:#ccc;"></div><span>Snowy</span> <span class="jp-weather-icon">❄️</span></div>
+          <div class="jp-weather-item"><div class="jp-check-box" style="border-color:#ccc;"></div><span>Indoors</span> <span class="jp-weather-icon">🏠</span></div>
+        </div>
+
+        <div class="jp-attended">
+          <span class="jp-attended-label">Did You Attend With Anybody?</span>
+          <div class="jp-attended-line">Mom, Hope</div>
+        </div>
+
+        <div class="jp-two-col-section">
+          <div>
+            <span class="jp-col-title">Top 3 Performers</span>
+            <div class="jp-numbered-list">
+              <div class="jp-numbered-item"><div class="jp-num-circle">1</div><div class="jp-item-line">Ronald Acuña</div></div>
+              <div class="jp-numbered-item"><div class="jp-num-circle">2</div><div class="jp-item-line">Daylen Lile</div></div>
+              <div class="jp-numbered-item"><div class="jp-num-circle">3</div><div class="jp-item-line">Austin Riley</div></div>
+            </div>
+          </div>
+          <div>
+            <span class="jp-col-title">Concessions</span>
+            <div class="jp-conc-lines">
+              <div class="jp-conc-line">Hot Dog $6.99</div>
+              <div class="jp-conc-line">2 Beers $18.98</div>
+              <div class="jp-conc-line">Popcorn $5.99</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="jp-ratings-section">
+          <div class="jp-ratings-grid">
+            <div class="jp-rating-col">
+              <span class="jp-rating-label">Atmosphere</span>
+              <div class="jp-bubbles">
+                <div class="jp-bubble filled"></div><div class="jp-bubble filled"></div><div class="jp-bubble filled"></div><div class="jp-bubble"></div><div class="jp-bubble"></div>
+              </div>
+              <div class="jp-bubbles">
+                <div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div>
+              </div>
+            </div>
+            <div class="jp-rating-col">
+              <span class="jp-rating-label">Stadium</span>
+              <div class="jp-bubbles">
+                <div class="jp-bubble filled"></div><div class="jp-bubble filled"></div><div class="jp-bubble filled"></div><div class="jp-bubble filled"></div><div class="jp-bubble"></div>
+              </div>
+              <div class="jp-bubbles">
+                <div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div>
+              </div>
+            </div>
+            <div class="jp-rating-col">
+              <span class="jp-rating-label">Overall</span>
+              <div class="jp-bubbles">
+                <div class="jp-bubble filled"></div><div class="jp-bubble filled"></div><div class="jp-bubble filled"></div><div class="jp-bubble filled"></div><div class="jp-bubble"></div>
+              </div>
+              <div class="jp-bubbles">
+                <div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div><div class="jp-bubble"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="jp-notes-section">
+          <span class="jp-notes-label">Notes</span>
+          <div class="jp-note-line">Empty stadium at first pitch, but respectable by the 3rd inning.</div>
+          <div class="jp-note-line">Nats went ahead 2-0 in the 2nd. 4-run 5th for the Braves</div>
+          <div class="jp-note-line">was the difference.</div>
+          <div class="jp-note-line">&nbsp;</div>
+          <div class="jp-note-line">&nbsp;</div>
+        </div>
+        <div class="jp-page-num">4</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section style="padding: 100px 48px; max-width: 1100px; margin: 0 auto;">
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;" class="reveal">
+    <div>
+      <div class="section-eyebrow">The Story Behind It</div>
+      <h2 class="section-title" style="font-size:clamp(40px,6vw,72px);">IT STARTED WITH MY GRANDPA.</h2>
+    </div>
+    <div style="font-size:15px; line-height:1.85; color:rgba(242,237,228,0.6);">
+      <p style="margin-bottom:24px;">Growing up, some of my favorite moments with my Grandpa were when we talked about the games he attended, moments he witnessed, teams he loved.</p>
+      <p style="margin-bottom:24px;">But over time, I noticed something. <strong style="color:var(--white); font-weight:500;">The details were fading.</strong> The opponent. Who was there with him. The little things that make a memory feel real — slowly going quiet.</p>
+      <p>Those stories deserved better. And so do yours.</p>
+    </div>
+  </div>
+
+  <div style="border-left: 4px solid var(--green); padding: 28px 0 28px 36px; margin: 60px 0;" class="reveal">
+    <p style="font-family:'Barlow Condensed',sans-serif; font-size:clamp(22px,3.5vw,38px); font-style:italic; line-height:1.25; color:var(--white); margin-bottom:12px;">"One day, your kids and grandkids are going to ask what it was like to be there. <em style="font-style:normal; color:var(--green-light);">I Was There</em> makes sure you'll have the answer."</p>
+    <span style="font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:0.25em; text-transform:uppercase; color:var(--muted);">The Inspiration Behind I Was There</span>
+  </div>
+
+</section>
+
+<!-- TESTIMONIALS -->
+<div style="background:#f7f3ec;">
+<section class="testimonials" style="max-width:1200px;margin:0 auto;">
+  <div class="section-eyebrow reveal" style="color:#2d6a4f;">Fan Reviews</div>
+  <h2 class="section-title reveal" style="color:#111;">FANS ARE<br>TALKING</h2>
+  <div class="reviews-grid">
+    <div class="review reveal" style="border-color:rgba(0,0,0,0.1);"><div class="review-stars" style="color:#2d6a4f;">★★★★★</div><p class="review-text" style="color:rgba(0,0,0,0.75);">"I've been a football fan for 30 years and never had a way to hold onto those memories. This journal changed that."</p><div class="review-author" style="color:#999;">Mike T. — Green Bay, WI</div></div>
+    <div class="review reveal" style="border-color:rgba(0,0,0,0.1);"><div class="review-stars" style="color:#2d6a4f;">★★★★★</div><p class="review-text" style="color:rgba(0,0,0,0.75);">"I use it for baseball, basketball, and football. The layout works for everything. My kids love flipping through old entries."</p><div class="review-author" style="color:#999;">Carla M. — Chicago, IL</div></div>
+    <div class="review reveal" style="border-color:rgba(0,0,0,0.1);"><div class="review-stars" style="color:#2d6a4f;">★★★★★</div><p class="review-text" style="color:rgba(0,0,0,0.75);">"Got this as a gift and filled it in one season. Just ordered three more — one for each of my kids in travel sports."</p><div class="review-author" style="color:#999;">Dave R. — Austin, TX</div></div>
+  </div>
+</section>
+</div>
+
+<!-- PRICING -->
+<section class="pricing" id="buy">
+  <div class="pricing-inner">
+    <div class="section-eyebrow reveal">Get the Journal</div>
+    <h2 class="section-title reveal">ONE PRICE.<br>A SEASON OF<br>MEMORIES.</h2>
+    <p class="pricing-sub reveal">Free shipping. Ships in 2–3 business days.</p>
+    <div class="price-box reveal">
+      <span class="price-amount">$39</span>
+      <span class="price-period">Per journal · Free shipping</span>
+      <ul class="price-includes">
+        <li>Two-Page Game Log Spreads</li>
+        <li>Works for All Sports</li>
+        <li>Atmosphere, Stadium & Overall Ratings</li>
+        <li>Top Performers Section</li>
+        <li>Weather & Ticket Information Fields</li>
+        <li>Concessions Tracker</li>
+        <li>Notes Section</li>
+        <li>Pages to Track Significant Metrics</li>
+      </ul>
+      <a href="#" class="btn-buy">Order Now</a>
+    </div>
+    <p class="pricing-note reveal">Secure checkout · Satisfaction guaranteed</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo-main">I WAS THERE</div>
+    <div class="footer-logo-sub">A Sports Fan Journal</div>
+  </div>
+  <div class="footer-links">
+    <a href="#">FAQ</a><a href="#">Shipping</a><a href="#">Contact</a>
+  </div>
+  <div class="footer-copy">© 2025 I Was There. All rights reserved.</div>
+</footer>
+
+<script>
+  function showSpread(type) {
+    document.querySelectorAll('.spread-wrapper').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById('spread-' + type).classList.add('active');
+    event.target.classList.add('active');
+  }
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.06 });
+  reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
